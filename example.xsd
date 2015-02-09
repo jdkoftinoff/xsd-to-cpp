@@ -49,7 +49,7 @@
        -->
   <xs:complexType name="Project">
     <xs:sequence>
-      <xs:element name="symbols" type="example:Symbol" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="symbols" type="example:Symbol" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
   <!-- 

@@ -51,7 +51,7 @@ struct Symbol
 
 struct Project
 {
-    Symbol m_symbols;
+    std::vector<Symbol> m_symbols;
 };
 
 
