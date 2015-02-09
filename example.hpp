@@ -14,20 +14,20 @@ typedef float Metres;
 typedef float Seconds;
 
 struct Edge;
-void load( const XML::Dom &dom, Edge &item );
-void save( XML::Dom &dom, const Edge &item );
+void load( const XML::Dom &dom, const std::string &path, Edge &item );
+void save( XML::Dom &dom, const std::string &path, const Edge &item );
 
 struct Symbol;
-void load( const XML::Dom &dom, Symbol &item );
-void save( XML::Dom &dom, const Symbol &item );
+void load( const XML::Dom &dom, const std::string &path, Symbol &item );
+void save( XML::Dom &dom, const std::string &path, const Symbol &item );
 
 struct Project;
-void load( const XML::Dom &dom, Project &item );
-void save( XML::Dom &dom, const Project &item );
+void load( const XML::Dom &dom, const std::string &path, Project &item );
+void save( XML::Dom &dom, const std::string &path, const Project &item );
 
 struct Root;
-void load( const XML::Dom &dom, Root &item );
-void save( XML::Dom &dom, const Root &item );
+void load( const XML::Dom &dom, const std::string &path, Root &item );
+void save( XML::Dom &dom, const std::string &path, const Root &item );
 
 
 struct Edge
@@ -51,7 +51,7 @@ struct Symbol
 
 struct Project
 {
-    std::vector<Symbol> m_symbols;
+    std::vector<Symbol> m_symbol;
 };
 
 

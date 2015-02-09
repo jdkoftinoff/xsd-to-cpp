@@ -127,7 +127,9 @@
 
   <xsl:template name="declare-load-from-dom">
     <xsl:param name="name"/>
-    <xsl:text>void load( const </xsl:text><xsl:value-of select="$dom-type"/><xsl:text> &amp;dom, </xsl:text>
+    <xsl:text>void load( const </xsl:text>
+    <xsl:value-of select="$dom-type"/>
+    <xsl:text> &amp;dom, const std::string &amp;path, </xsl:text>
     <xsl:value-of select="$name"/>
     <xsl:text> &amp;item );</xsl:text>
     <xsl:text>&#x0a;</xsl:text>
@@ -135,7 +137,9 @@
   
   <xsl:template name="declare-save-to-dom">
     <xsl:param name="name"/>
-    <xsl:text>void save( </xsl:text><xsl:value-of select="$dom-type"/><xsl:text> &amp;dom, const </xsl:text>
+    <xsl:text>void save( </xsl:text>
+    <xsl:value-of select="$dom-type"/>
+    <xsl:text> &amp;dom, const std::string &amp;path, const </xsl:text>
     <xsl:value-of select="$name"/>
     <xsl:text> &amp;item );</xsl:text>
     <xsl:text>&#x0a;</xsl:text>
