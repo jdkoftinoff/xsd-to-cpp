@@ -1,10 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema" 
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 >
   <xsl:output method="text"/>
   <xsl:param name="top-namespace"/>
+  <xsl:param name="base-filename"/>
+  <xsl:param name="dom-type"/>
+  <xsl:param name="additional-include"/>
 
   <xsl:template name="print-copyright-license">
     <xsl:text>&#x0a;</xsl:text>
@@ -18,6 +21,11 @@
     <xsl:text>#include &lt;cstdint&gt;&#x0a;</xsl:text>
     <xsl:text>#include &lt;memory&gt;&#x0a;</xsl:text>
     <xsl:text>#include &lt;vector&gt;&#x0a;</xsl:text>
+    <xsl:if test="string-length($additional-include)>0">
+      <xsl:text>#include "</xsl:text>
+      <xsl:value-of select="$additional-include"/>
+      <xsl:text>"&#x0a;</xsl:text>
+    </xsl:if>
     <xsl:text>&#x0a;</xsl:text>
   </xsl:template>
 
@@ -116,6 +124,22 @@
     <xsl:value-of select="$name"/>
     <xsl:text>;&#x0a;</xsl:text>
   </xsl:template>
+
+  <xsl:template name="declare-load-from-dom">
+    <xsl:param name="name"/>
+    <xsl:text>void load( const </xsl:text><xsl:value-of select="$dom-type"/><xsl:text> &amp;dom, </xsl:text>
+    <xsl:value-of select="$name"/>
+    <xsl:text> &amp;item );</xsl:text>
+    <xsl:text>&#x0a;</xsl:text>
+  </xsl:template>
+  
+  <xsl:template name="declare-save-to-dom">
+    <xsl:param name="name"/>
+    <xsl:text>void save( </xsl:text><xsl:value-of select="$dom-type"/><xsl:text> &amp;dom, const </xsl:text>
+    <xsl:value-of select="$name"/>
+    <xsl:text> &amp;item );</xsl:text>
+    <xsl:text>&#x0a;</xsl:text>
+  </xsl:template>
   
   <xsl:template match="xs:complexType">
     <xsl:text>&#x0a;</xsl:text>
@@ -205,10 +229,20 @@
       <xsl:with-param name="namespace" select="$top-namespace"/>
     </xsl:call-template>
     <xsl:apply-templates select="xs:simpleType"/>
+    <xsl:text>&#x0a;</xsl:text>
     <xsl:for-each select="xs:complexType">
       <xsl:call-template name="declare-struct">
         <xsl:with-param name="name" select="@name"/>
       </xsl:call-template>
+    <xsl:if test="string-length($dom-type)>0">
+      <xsl:call-template name="declare-load-from-dom">
+        <xsl:with-param name="name" select="@name"/>
+      </xsl:call-template>
+      <xsl:call-template name="declare-save-to-dom">
+        <xsl:with-param name="name" select="@name"/>
+      </xsl:call-template>
+    </xsl:if>
+      <xsl:text>&#x0a;</xsl:text>
     </xsl:for-each>
     <xsl:apply-templates select="xs:complexType"/>
     <xsl:call-template name="close-namespace">

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:example="example" version="1.0" elementFormDefault="unqualified" attributeFormDefault="unqualified" targetNamespace="example">
+  <xs:element name="root" type="example:root"/>
+  <!-- 
+       Distance 
+       -->
+  <xs:simpleType name="Metres">
+      <xs:annotation>
+        <xs:documentation>
+            A Distance in Metres
+        </xs:documentation>
+      </xs:annotation>
+    <xs:restriction base="xs:float"/>
+  </xs:simpleType>
+  <!-- 
+       Time 
+       -->
+  <xs:simpleType name="Seconds">
+      <xs:annotation>
+        <xs:documentation>
+        A time in seconds
+        </xs:documentation>
+      </xs:annotation>
+    <xs:restriction base="xs:float"/>
+  </xs:simpleType>
+  <!--
+      Edge
+      -->
+  <xs:complexType name="Edge">
+    <xs:attribute use="required" name="color" type="xs:string"/> 
+    <xs:attribute use="required" name="width" type="xs:integer"/> 
+  </xs:complexType>  
+  <!-- 
+       Symbol
+       -->
+  <xs:complexType name="Symbol">
+    <xs:sequence>
+      <xs:element name="top" type="example:Edge" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="left" type="example:Edge" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="right" type="example:Edge" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="bottom" type="example:Edge" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute use="required" name="width" type="example:Metres"/>
+    <xs:attribute use="required" name="height" type="example:Metres"/>
+    <xs:attribute use="required" name="name" type="xs:string"/>
+  </xs:complexType>
+  <!-- 
+       Full project file 
+       -->
+  <xs:complexType name="Project">
+    <xs:sequence>
+      <xs:element name="symbols" type="example:Symbol" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- 
+       Top level element could be allowed to be any reasonable element to allow partial project data interchange
+       -->
+  <xs:complexType name="Root">
+    <xs:sequence>
+      <xs:element name="project" type="example:Project"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
