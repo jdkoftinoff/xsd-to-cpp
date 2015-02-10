@@ -11,7 +11,21 @@
 
 namespace Example {
 
+
+/** Metres
+ *
+ *  
+            A Distance in Metres
+        
+ */
 typedef float Metres;
+
+/** Seconds
+ *
+ *  
+        A time in seconds
+        
+ */
 typedef float Seconds;
 
 template <typename T> using optional = std::vector<T>;
@@ -26,6 +40,9 @@ struct Project;
 struct Root;
 
 
+
+/** Edge
+ */
 struct Edge
 {
     void load( const XML::Dom &dom, const std::string &path ); 
@@ -36,6 +53,10 @@ struct Edge
 };
 
 
+
+
+/** Symbol
+ */
 struct Symbol
 {
     void load( const XML::Dom &dom, const std::string &path ); 
@@ -56,6 +77,10 @@ struct Symbol
 };
 
 
+
+
+/** Project
+ */
 struct Project
 {
     void load( const XML::Dom &dom, const std::string &path ); 
@@ -66,6 +91,10 @@ struct Project
 };
 
 
+
+
+/** Root
+ */
 struct Root
 {
     void load( const XML::Dom &dom, const std::string &path ); 
@@ -74,6 +103,7 @@ struct Root
 
     required<Project> m_project;
 };
+
 
 
 }
