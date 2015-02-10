@@ -43,6 +43,7 @@
     <xs:attribute use="required" name="width" type="example:Metres"/>
     <xs:attribute use="required" name="height" type="example:Metres"/>
     <xs:attribute use="required" name="name" type="xs:string"/>
+    <xs:attribute use="optional" name="id" type="xs:string"/>
   </xs:complexType>
   <!-- 
        Full project file 
